@@ -3,15 +3,28 @@ package gameoflife
 type status byte
 
 const (
-  EMPTY status = iota
+  ALIVE status = iota
   DEAD
-  OCCUPIED
-  ALIVE
 )
 
 type Cell struct {
   Point
   Status status
-  Neighbors []Point
+  LiveNeighbors []Point
+}
+
+func (c Cell) nextGeneration() Cell {
+  n := len(c.LiveNeighbors)
+  switch {
+  case n < 2:
+    c.Status = DEAD
+
+  case n == 3:
+    c.Status = ALIVE
+
+  case n > 3:
+    c.Status = DEAD
+  }
+  return c
 }
 
