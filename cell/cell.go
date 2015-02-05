@@ -1,6 +1,11 @@
-package gameoflife
+package cell
+
+import (
+  p "github.com/dkinzer/gameoflife/point"
+)
 
 type status byte
+type Point p.Point
 
 const (
   ALIVE status = iota

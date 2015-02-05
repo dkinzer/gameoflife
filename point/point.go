@@ -1,4 +1,4 @@
-package gameoflife
+package point
 
 const NEIGHBORS_COUNT_MAX = 8
 const NEIGHBORS_COUNT_MIN = 0
