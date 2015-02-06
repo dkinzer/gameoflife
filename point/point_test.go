@@ -88,7 +88,7 @@ func TestNeighborsOfPoint(t *testing.T) {
     Point{1, -1},
   }
 
-  actual := Point{0,0}.neighbors()
+  actual := Point{0,0}.Neighbors()
 
   if actual != expected {
     t.Error("NeighborsOfPoint(Point{0, 0}")

@@ -8,7 +8,12 @@ type Point struct {
   Y int
 }
 
-func (p Point) neighbors() [NEIGHBORS_COUNT_MAX]Point {
+type Pointer interface {
+  UpperRight() Point
+}
+
+
+func (p Point) Neighbors() [NEIGHBORS_COUNT_MAX]Point {
   return [NEIGHBORS_COUNT_MAX]Point{
     p.upperLeft(),
     p.upperCenter(),
