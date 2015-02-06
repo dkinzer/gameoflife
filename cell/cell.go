@@ -5,7 +5,6 @@ import (
 )
 
 type status byte
-type Point p.Point
 
 const (
   ALIVE status = iota
@@ -13,9 +12,9 @@ const (
 )
 
 type Cell struct {
-  Point
+  p.Point
   Status status
-  LiveNeighbors []Point
+  LiveNeighbors []p.Point
 }
 
 func (c Cell) nextGeneration() Cell {

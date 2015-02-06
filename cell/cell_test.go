@@ -2,6 +2,7 @@ package cell
 
 import (
   "testing"
+  p "github.com/dkinzer/gameoflife/point"
 )
 
 func TestNewCellStatus(t *testing.T) {
@@ -17,7 +18,7 @@ func TestNewCellStatus(t *testing.T) {
 func TestNextGenerationZeroLiveNeighbors(t *testing.T) {
   cell := Cell{
     Status: ALIVE,
-    LiveNeighbors: []Point{},
+    LiveNeighbors: []p.Point{},
   }.nextGeneration()
 
   expected := DEAD
@@ -31,8 +32,8 @@ func TestNextGenerationZeroLiveNeighbors(t *testing.T) {
 func TestNextGenerationOneLiveNeighbors(t *testing.T) {
   cell := Cell{
     Status: ALIVE,
-    LiveNeighbors: []Point{
-      Point{0, 1},
+    LiveNeighbors: []p.Point{
+      p.Point{0, 1},
     },
   }.nextGeneration()
   expected := DEAD
@@ -46,9 +47,9 @@ func TestNextGenerationOneLiveNeighbors(t *testing.T) {
 func TestNextGenerationTwoLiveNeighbors(t *testing.T) {
   cell := Cell{
     Status: ALIVE,
-    LiveNeighbors: []Point{
-      Point{0, 1},
-      Point{1, 1},
+    LiveNeighbors: []p.Point{
+      p.Point{0, 1},
+      p.Point{1, 1},
     },
   }.nextGeneration()
   expected := ALIVE
@@ -62,11 +63,11 @@ func TestNextGenerationTwoLiveNeighbors(t *testing.T) {
 func TestNextGenerationFourLiveNeighbors(t *testing.T) {
   cell := Cell{
     Status: ALIVE,
-    LiveNeighbors: []Point{
-      Point{0, 1},
-      Point{1, 1},
-      Point{-1, 1},
-      Point{-1, 0},
+    LiveNeighbors: []p.Point{
+      p.Point{0, 1},
+      p.Point{1, 1},
+      p.Point{-1, 1},
+      p.Point{-1, 0},
     },
   }.nextGeneration()
   expected := DEAD
@@ -81,10 +82,10 @@ func TestNextGenerationFourLiveNeighbors(t *testing.T) {
 func TestNextGenerationThreeLiveNeighbors(t *testing.T) {
   cell := Cell{
     Status: DEAD,
-    LiveNeighbors: []Point{
-      Point{0, 1},
-      Point{1, 1},
-      Point{-1, 1},
+    LiveNeighbors: []p.Point{
+      p.Point{0, 1},
+      p.Point{1, 1},
+      p.Point{-1, 1},
     },
   }.nextGeneration()
   expected := ALIVE
@@ -98,9 +99,9 @@ func TestNextGenerationThreeLiveNeighbors(t *testing.T) {
 func TestNextDeadGenerationTwoLiveNeighbors(t *testing.T) {
   cell := Cell{
     Status: DEAD,
-    LiveNeighbors: []Point{
-      Point{0, 1},
-      Point{1, 1},
+    LiveNeighbors: []p.Point{
+      p.Point{0, 1},
+      p.Point{1, 1},
     },
   }.nextGeneration()
   expected := DEAD
@@ -114,10 +115,10 @@ func TestNextDeadGenerationTwoLiveNeighbors(t *testing.T) {
 func TestNextDeadGenerationThreeLiveNeighbors(t *testing.T) {
   cell := Cell{
     Status: DEAD,
-    LiveNeighbors: []Point{
-      Point{0, 1},
-      Point{1, 1},
-      Point{-1, 1},
+    LiveNeighbors: []p.Point{
+      p.Point{0, 1},
+      p.Point{1, 1},
+      p.Point{-1, 1},
     },
   }.nextGeneration()
   expected := ALIVE
@@ -131,11 +132,11 @@ func TestNextDeadGenerationThreeLiveNeighbors(t *testing.T) {
 func TestNextDeadGenerationFourLiveNeighbors(t *testing.T) {
   cell := Cell{
     Status: DEAD,
-    LiveNeighbors: []Point{
-      Point{0, 1},
-      Point{1, 1},
-      Point{-1, 1},
-      Point{-1, 0},
+    LiveNeighbors: []p.Point{
+      p.Point{0, 1},
+      p.Point{1, 1},
+      p.Point{-1, 1},
+      p.Point{-1, 0},
     },
   }.nextGeneration()
   expected := DEAD
