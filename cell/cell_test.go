@@ -16,13 +16,11 @@ func TestNewCellStatus(t *testing.T) {
 
 // What happens to the living.
 func TestNextGenerationZeroLiveNeighbors(t *testing.T) {
-  cell := Cell{
+  expected := DEAD
+  actual := Cell{
     Status: ALIVE,
     LiveNeighbors: []p.Point{},
-  }.nextGeneration()
-
-  expected := DEAD
-  actual := cell.Status
+  }.nextGenerationStatus()
 
   if expected != actual {
     t.Error("Next generation dies if no living neighbors.")
@@ -30,14 +28,13 @@ func TestNextGenerationZeroLiveNeighbors(t *testing.T) {
 }
 
 func TestNextGenerationOneLiveNeighbors(t *testing.T) {
-  cell := Cell{
+  expected := DEAD
+  actual := Cell{
     Status: ALIVE,
     LiveNeighbors: []p.Point{
       p.Point{0, 1},
     },
-  }.nextGeneration()
-  expected := DEAD
-  actual := cell.Status
+  }.nextGenerationStatus()
 
   if expected != actual {
     t.Error("Next generation dies if next to only one living neighbor.")
@@ -45,15 +42,14 @@ func TestNextGenerationOneLiveNeighbors(t *testing.T) {
 }
 
 func TestNextGenerationTwoLiveNeighbors(t *testing.T) {
-  cell := Cell{
+  expected := ALIVE
+  actual := Cell{
     Status: ALIVE,
     LiveNeighbors: []p.Point{
       p.Point{0, 1},
       p.Point{1, 1},
     },
-  }.nextGeneration()
-  expected := ALIVE
-  actual := cell.Status
+  }.nextGenerationStatus()
 
   if expected != actual {
     t.Error("Next generation stays alive if next to two living neighbor.")
@@ -61,7 +57,8 @@ func TestNextGenerationTwoLiveNeighbors(t *testing.T) {
 }
 
 func TestNextGenerationFourLiveNeighbors(t *testing.T) {
-  cell := Cell{
+  expected := DEAD
+  actual := Cell{
     Status: ALIVE,
     LiveNeighbors: []p.Point{
       p.Point{0, 1},
@@ -69,9 +66,7 @@ func TestNextGenerationFourLiveNeighbors(t *testing.T) {
       p.Point{-1, 1},
       p.Point{-1, 0},
     },
-  }.nextGeneration()
-  expected := DEAD
-  actual := cell.Status
+  }.nextGenerationStatus()
 
   if expected != actual {
     t.Error("Next generation dies if next to four living neighbors.")
@@ -80,16 +75,15 @@ func TestNextGenerationFourLiveNeighbors(t *testing.T) {
 
 // What happens to the dead.
 func TestNextGenerationThreeLiveNeighbors(t *testing.T) {
-  cell := Cell{
+  expected := ALIVE
+  actual := Cell{
     Status: DEAD,
     LiveNeighbors: []p.Point{
       p.Point{0, 1},
       p.Point{1, 1},
       p.Point{-1, 1},
     },
-  }.nextGeneration()
-  expected := ALIVE
-  actual := cell.Status
+  }.nextGenerationStatus()
 
   if expected != actual {
     t.Error("Next generation resurrects if next to three living neighbors.")
@@ -97,15 +91,14 @@ func TestNextGenerationThreeLiveNeighbors(t *testing.T) {
 }
 
 func TestNextDeadGenerationTwoLiveNeighbors(t *testing.T) {
-  cell := Cell{
+  expected := DEAD
+  actual := Cell{
     Status: DEAD,
     LiveNeighbors: []p.Point{
       p.Point{0, 1},
       p.Point{1, 1},
     },
-  }.nextGeneration()
-  expected := DEAD
-  actual := cell.Status
+  }.nextGenerationStatus()
 
   if expected != actual {
     t.Error("Next generation stays dead if next to two living neighbors.")
@@ -113,16 +106,15 @@ func TestNextDeadGenerationTwoLiveNeighbors(t *testing.T) {
 }
 
 func TestNextDeadGenerationThreeLiveNeighbors(t *testing.T) {
-  cell := Cell{
+  expected := ALIVE
+  actual := Cell{
     Status: DEAD,
     LiveNeighbors: []p.Point{
       p.Point{0, 1},
       p.Point{1, 1},
       p.Point{-1, 1},
     },
-  }.nextGeneration()
-  expected := ALIVE
-  actual := cell.Status
+  }.nextGenerationStatus()
 
   if expected != actual {
     t.Error("Next generation resurrects if next to three living neighbors.")
@@ -130,7 +122,8 @@ func TestNextDeadGenerationThreeLiveNeighbors(t *testing.T) {
 }
 
 func TestNextDeadGenerationFourLiveNeighbors(t *testing.T) {
-  cell := Cell{
+  expected := DEAD
+  actual := Cell{
     Status: DEAD,
     LiveNeighbors: []p.Point{
       p.Point{0, 1},
@@ -138,9 +131,7 @@ func TestNextDeadGenerationFourLiveNeighbors(t *testing.T) {
       p.Point{-1, 1},
       p.Point{-1, 0},
     },
-  }.nextGeneration()
-  expected := DEAD
-  actual := cell.Status
+  }.nextGenerationStatus()
 
   if expected != actual {
     t.Error("Next generation stays dead if next to four living neighbors.")
@@ -158,7 +149,6 @@ func TestNeighborsOfCell(t *testing.T) {
     p.Point{1, 0},
     p.Point{2, 0},
   }
-
   actual := Cell{
     Point: p.Point{1, 1},
   }.Neighbors()

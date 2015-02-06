@@ -17,18 +17,18 @@ type Cell struct {
   LiveNeighbors []p.Point
 }
 
-func (c Cell) nextGeneration() Cell {
+func (c Cell) nextGenerationStatus() status {
   n := len(c.LiveNeighbors)
   switch {
   case n < 2:
-    c.Status = DEAD
+    return DEAD
 
   case n == 3:
-    c.Status = ALIVE
+    return ALIVE
 
   case n > 3:
-    c.Status = DEAD
+    return DEAD
   }
-  return c
+  return c.Status
 }
 
