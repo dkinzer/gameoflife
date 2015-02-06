@@ -147,3 +147,24 @@ func TestNextDeadGenerationFourLiveNeighbors(t *testing.T) {
   }
 }
 
+func TestNeighborsOfCell(t *testing.T) {
+  expected := [p.NEIGHBORS_COUNT_MAX]p.Point{
+    p.Point{0, 2},
+    p.Point{1, 2},
+    p.Point{2, 2},
+    p.Point{0, 1},
+    p.Point{2, 1},
+    p.Point{0, 0},
+    p.Point{1, 0},
+    p.Point{2, 0},
+  }
+
+  actual := Cell{
+    Point: p.Point{1, 1},
+  }.Neighbors()
+
+  if actual != expected {
+    t.Error("Cell.Neighbors()")
+  }
+}
+
