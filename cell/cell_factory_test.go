@@ -1,6 +1,7 @@
 package cell
 
 import(
+  "fmt"
   "reflect"
   "testing"
   p "github.com/dkinzer/gameoflife/point"
@@ -72,6 +73,8 @@ func TestFactoryTwoJoinedPoints(t *testing.T) {
   })
 
   if !reflect.DeepEqual(actual, expected) {
+    fmt.Println("expected: ", expected)
+    fmt.Println("actual: ", actual)
     t.Error("CellFactory(Two joined Point slice).")
   }
 }
