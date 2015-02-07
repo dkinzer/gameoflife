@@ -8,14 +8,13 @@ import(
 )
 
 func TestFactorySinglePoint(t *testing.T) {
-  m := make(map[p.Point]Cell, 1)
-  m[p.Point{1, 2}] = Cell{
-    Point: p.Point{1, 2},
-    Status: ALIVE,
-    LiveNeighbors: []p.Point{},
+  expected := map[p.Point]Cell{
+    p.Point{1, 2}:Cell{
+      Point: p.Point{1, 2},
+      Status: ALIVE,
+      LiveNeighbors: []p.Point{},
+    },
   }
-
-  expected := m
   actual := CellFactory([]p.Point{
     p.Point{1, 2},
   })
@@ -26,19 +25,18 @@ func TestFactorySinglePoint(t *testing.T) {
 }
 
 func TestFactoryTwoSeperatePoints(t *testing.T) {
-  m := make(map[p.Point]Cell, 2)
-  m[p.Point{1, 2}] = Cell{
-    Point: p.Point{1, 2},
-    Status: ALIVE,
-    LiveNeighbors: []p.Point{},
+  expected := map[p.Point]Cell{
+    p.Point{1, 2}: Cell{
+      Point: p.Point{1, 2},
+      Status: ALIVE,
+      LiveNeighbors: []p.Point{},
+    },
+    p.Point{4, 5}: Cell{
+      Point: p.Point{4, 5},
+      Status: ALIVE,
+      LiveNeighbors: []p.Point{},
+    },
   }
-
-  m[p.Point{4, 5}] = Cell{
-    Point: p.Point{4, 5},
-    Status: ALIVE,
-    LiveNeighbors: []p.Point{},
-  }
-  expected := m
   actual := CellFactory([]p.Point{
     p.Point{1, 2},
     p.Point{4, 5},
@@ -50,23 +48,22 @@ func TestFactoryTwoSeperatePoints(t *testing.T) {
 }
 
 func TestFactoryTwoJoinedPoints(t *testing.T) {
-  m := make(map[p.Point]Cell, 2)
-  m[p.Point{1, 2}] = Cell{
-    Point: p.Point{1, 2},
-    Status: ALIVE,
-    LiveNeighbors: []p.Point{
-      p.Point{2, 3},
+  expected := map[p.Point]Cell{
+    p.Point{1, 2}: Cell{
+      Point: p.Point{1, 2},
+      Status: ALIVE,
+      LiveNeighbors: []p.Point{
+        p.Point{2, 3},
+      },
+    },
+    p.Point{2, 3}: Cell{
+      Point: p.Point{2, 3},
+      Status: ALIVE,
+      LiveNeighbors: []p.Point{
+        p.Point{1, 2},
+      },
     },
   }
-  m[p.Point{2, 3}] = Cell{
-    Point: p.Point{2, 3},
-    Status: ALIVE,
-    LiveNeighbors: []p.Point{
-      p.Point{1, 2},
-    },
-  }
-
-  expected := m
   actual := CellFactory([]p.Point{
     p.Point{1, 2},
     p.Point{2, 3},
