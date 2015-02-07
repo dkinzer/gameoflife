@@ -47,14 +47,14 @@ func (p Point) centerRight() Point {
 }
 
 func (p Point) bottomLeft() Point {
-  return Point{p.X - 1, p.X - 1}
+  return Point{p.X - 1, p.Y - 1}
 }
 
 func (p Point) bottomCenter() Point {
-  return Point{p.X, p.X - 1}
+  return Point{p.X, p.Y - 1}
 }
 
 func (p Point) bottomRight() Point {
-  return Point{p.X + 1, p.X - 1}
+  return Point{p.X + 1, p.Y - 1}
 }
 
